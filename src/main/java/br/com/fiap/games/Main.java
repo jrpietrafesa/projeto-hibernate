@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
 
@@ -24,9 +25,20 @@ public class Main {
 
             EntityManager em = Conexao.getEntityManager();
 
-            pesquisar(em);
+            //pesquisar(em);
+            //cadastrar(em);
+            listarTodosOsGames(em);
 
 
+        }
+
+        public static void listarTodosOsGames(EntityManager em) {
+            GameDao dao = new GameDao(em);
+            List<Game> games = dao.listarTodosOsGames();
+
+            for (Game game : games) {
+                System.out.println(game);
+            }
         }
 
         public static void pesquisar(EntityManager em) {

@@ -3,6 +3,8 @@ package br.com.fiap.games.dao;
 import br.com.fiap.games.model.Game;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
+
 public class GameDao {
 
     private EntityManager em;
@@ -27,6 +29,18 @@ public class GameDao {
     public Game buscarGamePorId(Game game) {
         return em.find(Game.class, game.getId());
     }
+
+    public List<Game> listarTodosOsGames() {
+        //SELECT * FROM TBL_GAMES ORDER BY TITULO DESC
+        String jpqlQuery = "SELECT g FROM Game g ORDER BY g.titulo ASC";
+        return em.createQuery(jpqlQuery, Game.class).getResultList();
+    }
+
+
+
+
+
+
 
 }
 
