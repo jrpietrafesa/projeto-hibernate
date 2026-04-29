@@ -26,7 +26,7 @@ public class Game {
 
     private Double valor;
     private String produtora;
-    private Boolean finaliado;
+    private Boolean finalizado;
     private String categoria;
 
     public Long getId() {
@@ -69,12 +69,12 @@ public class Game {
         this.produtora = produtora;
     }
 
-    public Boolean getFinaliado() {
-        return finaliado;
+    public Boolean getFinalizado() {
+        return finalizado;
     }
 
-    public void setFinaliado(Boolean finaliado) {
-        this.finaliado = finaliado;
+    public void setFinalizado(Boolean finalizado) {
+        this.finalizado = finalizado;
     }
 
     public String getCategoria() {
@@ -83,5 +83,16 @@ public class Game {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "ID:" + this.id + ""
+                + "\nTITULO: " + this.titulo + ""
+                + "\nPRODUTORA: " + this.produtora + ""
+                + "\nCATEGORIA: " + this.categoria + ""
+                + "\nLANÇAMENTO: " + this.dataLancamento + ""
+                + "\nFINALIZADO: " + this.finalizado + ""
+                + "\nVALOR: " + this.valor + "\n ---------------------------";
     }
 }
