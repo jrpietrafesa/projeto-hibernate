@@ -1,6 +1,8 @@
 package br.com.fiap.games;
 
+import br.com.fiap.games.dao.CategoriaDao;
 import br.com.fiap.games.dao.GameDao;
+import br.com.fiap.games.model.Categoria;
 import br.com.fiap.games.model.Game;
 import br.com.fiap.games.utils.Conexao;
 import jakarta.persistence.EntityManager;
@@ -26,8 +28,8 @@ public class Main {
             EntityManager em = Conexao.getEntityManager();
 
             //pesquisar(em);
-            //cadastrar(em);
-            listarTodosOsGames(em);
+            cadastrar(em);
+            //listarTodosOsGames(em);
 
 
         }
@@ -59,16 +61,22 @@ public class Main {
         }
 
         public static void cadastrar(EntityManager em) {
+            Categoria categoria = new Categoria();
+            categoria.setNomeCategoria("LUTA");
+
+            CategoriaDao categoriaDao = new CategoriaDao(em);
+            em.getTransaction().begin();
+            categoriaDao.salvar(categoria);
+
             Game game1 = new Game();
-            game1.setTitulo("League of Legends");
-            game1.setCategoria("MOBA");
+            game1.setTitulo("MORTAL KOMBAT");
+            game1.setCategoria(categoria);
             game1.setDataLancamento(LocalDate.of(2010, 05, 11));
             game1.setFinalizado(false);
-            game1.setProdutora("RIOT");
+            game1.setProdutora("ACCLAIN");
             game1.setValor(19.90);
 
             GameDao gameDao = new GameDao(em);
-            em.getTransaction().begin();
             gameDao.salvar(game1);
             em.getTransaction().commit();
             em.close();
