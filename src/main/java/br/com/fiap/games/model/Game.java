@@ -30,6 +30,7 @@ public class Game {
 
     //Muitos jogos para 1 categoria
     @ManyToOne
+    @JoinColumn(name = "Categoria_id")
     private Categoria categoria;
 
     public Long getId() {

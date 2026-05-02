@@ -28,10 +28,19 @@ public class Main {
             EntityManager em = Conexao.getEntityManager();
 
             //pesquisar(em);
-            cadastrar(em);
+            //cadastrar(em);
             //listarTodosOsGames(em);
+            listarCategoriaPorId(em);
 
 
+        }
+
+        public static void listarCategoriaPorId(EntityManager em) {
+            CategoriaDao categoriaDao = new CategoriaDao(em);
+            Categoria categoria = new Categoria();
+            categoria.setId(21L);
+            Categoria categoriaEncontrada = categoriaDao.buscarCategoriaId(categoria);
+            System.out.println(categoriaEncontrada);
         }
 
         public static void listarTodosOsGames(EntityManager em) {
@@ -62,21 +71,22 @@ public class Main {
 
         public static void cadastrar(EntityManager em) {
             Categoria categoria = new Categoria();
-            categoria.setNomeCategoria("LUTA");
+            categoria.setId(21L);
 
-            CategoriaDao categoriaDao = new CategoriaDao(em);
+            //CategoriaDao categoriaDao = new CategoriaDao(em);
             em.getTransaction().begin();
-            categoriaDao.salvar(categoria);
+            //categoriaDao.salvar(categoria);
 
             Game game1 = new Game();
-            game1.setTitulo("MORTAL KOMBAT");
+            game1.setTitulo("STREETS OF RAGE");
             game1.setCategoria(categoria);
-            game1.setDataLancamento(LocalDate.of(2010, 05, 11));
-            game1.setFinalizado(false);
-            game1.setProdutora("ACCLAIN");
-            game1.setValor(19.90);
+            game1.setDataLancamento(LocalDate.of(1991, 7, 1));
+            game1.setFinalizado(true);
+            game1.setProdutora("SEGA");
+            game1.setValor(99.99);
 
             GameDao gameDao = new GameDao(em);
+
             gameDao.salvar(game1);
             em.getTransaction().commit();
             em.close();
